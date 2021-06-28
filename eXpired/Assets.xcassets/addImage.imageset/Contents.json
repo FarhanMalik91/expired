@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "cosmetics (1).png",
+      "filename" : "addImage.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "addImage@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "addImage@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

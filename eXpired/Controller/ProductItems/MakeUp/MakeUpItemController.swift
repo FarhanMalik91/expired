@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddProductViewController: UIViewController {
+class MakeUpItemController: UIViewController {
     
     //MARK:-UI-Elements
     let Productlabel = label(text: "+ Add your own Product!", textcolor: #colorLiteral(red: 0.5607843137, green: 0.5607843137, blue: 0.5607843137, alpha: 1), font: .setFont(fontName: .Poppins_Regular, fontSize: 14), alignment: .center)
@@ -63,7 +63,7 @@ class AddProductViewController: UIViewController {
     }
     @objc func addTapGesture(){
         print("Tapped here ")
-        let controller = AddProductDetailViewController()
+        let controller = AddMakeupItemController()
         navigationController?.pushViewController(controller, animated: true)
     }
     

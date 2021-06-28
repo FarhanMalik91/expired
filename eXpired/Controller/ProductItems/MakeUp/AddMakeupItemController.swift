@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddProductDetailViewController: UIViewController {
+class AddMakeupItemController: UIViewController {
     
     //MARK:-UI-Elements
     let productImage = ImageView(image: "make")
@@ -24,6 +24,15 @@ class AddProductDetailViewController: UIViewController {
     let expireyDateTF = txtField(text: "202-555-0132", textColor: .black, font: .setFont(fontName: .Poppins_Regular, fontSize: 14))
     let monthTF = txtField(text: "202-555-0132", textColor: .black, font: .setFont(fontName: .Poppins_Regular, fontSize: 14))
     let doneButton = button(text: "Done", color: .white, font: .setFont(fontName: .Poppins_Regular, fontSize: 18), cornerradius: 10, bgcolor: #colorLiteral(red: 0.137254902, green: 0.3019607843, blue: 0.4196078431, alpha: 1))
+    lazy var addImageButton : UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "addImage"), for: .normal)
+        button.addTarget(self, action: #selector(addImageButtonPressed), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = Constants.AppColor.bgColor
@@ -31,42 +40,45 @@ class AddProductDetailViewController: UIViewController {
         self.navigationController?.navigationBar.barTintColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
         productImage.contentMode = .scaleAspectFill
-        productImage.layer.cornerRadius = 50
         setUPUI()
+        datePurchaseTF.addInputViewDatePicker(target: self, selector: #selector(datePurchaseButtonPressed))
+        dateOpenedTF.addInputViewDatePicker(target: self, selector: #selector(dateOpenedButtonPressed))
+        expireyDateTF.addInputViewDatePicker(target: self, selector: #selector(dateExpireButtonPressed))
+        monthTF.addInputViewDatePicker(target: self, selector: #selector(monthbuttonPressed))
     }
     
     //MARK:-Helper Functions
     func setUPUI(){
-        view.addSubview(productImage)
         
+        view.addSubview(productImage)
+        view.addSubview(addImageButton)
         view.addSubview(BrandNameLabel)
         view.addSubview(brandNameTF)
-        
         view.addSubview(shadeLabel)
         view.addSubview(shadeTF)
-        
         view.addSubview(datePurchaseLabel)
         view.addSubview(datePurchaseTF)
-        
         view.addSubview(dateOpenedLabel)
         view.addSubview(dateOpenedTF)
-        
         view.addSubview(expireyDateLabel)
         view.addSubview(expireyDateTF)
-        
         view.addSubview(MonthLabel)
         view.addSubview(monthTF)
-        
         view.addSubview(doneButton)
 
         NSLayoutConstraint.activate([
             productImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10.heightRatio),
-            productImage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 138.widthRatio),
-            productImage.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -138.widthRatio),
-            productImage.heightAnchor.constraint(equalToConstant: 100),
-            productImage.widthAnchor.constraint(equalToConstant: 100),
+            productImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            productImage.widthAnchor.constraint(equalToConstant: 100.widthRatio),
+            productImage.heightAnchor.constraint(equalTo: productImage.widthAnchor),
             
-            BrandNameLabel.topAnchor.constraint(equalTo: productImage.bottomAnchor, constant: 25.heightRatio),
+            addImageButton.widthAnchor.constraint(equalToConstant: 25),
+            addImageButton.heightAnchor.constraint(equalToConstant: 25),
+            
+            addImageButton.trailingAnchor.constraint(equalTo: productImage.trailingAnchor),
+            addImageButton.bottomAnchor.constraint(equalTo: productImage.bottomAnchor),
+            
+            BrandNameLabel.topAnchor.constraint(equalTo: productImage.bottomAnchor, constant: 15.heightRatio),
             BrandNameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20.widthRatio),
             
             brandNameTF.topAnchor.constraint(equalTo: BrandNameLabel.bottomAnchor, constant: 5.heightRatio),
@@ -114,16 +126,64 @@ class AddProductDetailViewController: UIViewController {
             monthTF.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20.widthRatio),
             monthTF.heightAnchor.constraint(equalToConstant: 40.heightRatio),
             
-            doneButton.topAnchor.constraint(equalTo: monthTF.bottomAnchor, constant: 50.heightRatio),
+            doneButton.topAnchor.constraint(equalTo: monthTF.bottomAnchor, constant: 25.heightRatio),
             doneButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20.widthRatio),
             doneButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20.widthRatio),
             doneButton.heightAnchor.constraint(equalToConstant: 44.heightRatio),
    
         ])
         
+      
     }
-    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    self.view.endEditing(true)
 
+    }
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        productImage.layer.cornerRadius = productImage.frame.height / 2
+    }
    
 
+    //MARK:-Selectors
+    @objc func datePurchaseButtonPressed() {
+        if let  datePicker = self.datePurchaseTF.inputView as? UIDatePicker {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = .medium
+            self.datePurchaseTF.text = dateFormatter.string(from: datePicker.date)
+        }
+        self.datePurchaseTF.resignFirstResponder()
+     }
+    @objc func dateOpenedButtonPressed() {
+        if let  datePicker = self.dateOpenedTF.inputView as? UIDatePicker {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = .medium
+            self.dateOpenedTF.text = dateFormatter.string(from: datePicker.date)
+        }
+        self.dateOpenedTF.resignFirstResponder()
+     }
+    @objc func dateExpireButtonPressed() {
+        if let  datePicker = self.expireyDateTF.inputView as? UIDatePicker {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = .medium
+            self.expireyDateTF.text = dateFormatter.string(from: datePicker.date)
+        }
+        self.expireyDateTF.resignFirstResponder()
+     }
+    @objc func monthbuttonPressed() {
+        if let  datePicker = self.monthTF.inputView as? UIDatePicker {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = .short
+            dateFormatter.dateFormat = "MMMM"
+            self.monthTF.text = dateFormatter.string(from: datePicker.date)
+        }
+        self.monthTF.resignFirstResponder()
+     }
+    @objc func addImageButtonPressed(){
+        ImagePickerManager().pickImage(self) { [weak self] (image) in
+            DispatchQueue.main.async { [weak self] in
+                self?.productImage.image = image
+            }
+        }
+    }
 }

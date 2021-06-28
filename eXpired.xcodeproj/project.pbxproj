@@ -7,11 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0403FEFB268A629400B3EA73 /* ProductListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0403FEFA268A629400B3EA73 /* ProductListController.swift */; };
+		0403FEFF268A645600B3EA73 /* AddMakeUpProductController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0403FEFE268A645600B3EA73 /* AddMakeUpProductController.swift */; };
+		0403FF02268A650700B3EA73 /* MakeUpItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0403FF01268A650700B3EA73 /* MakeUpItemController.swift */; };
+		0403FF04268A653C00B3EA73 /* AddMakeupItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0403FF03268A653C00B3EA73 /* AddMakeupItemController.swift */; };
+		0403FF06268A6C3500B3EA73 /* ImagePickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0403FF05268A6C3500B3EA73 /* ImagePickerManager.swift */; };
 		84409F2B2689A76F0084FC5F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84409F2A2689A76F0084FC5F /* AppDelegate.swift */; };
 		84409F2F2689A76F0084FC5F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84409F2E2689A76F0084FC5F /* ViewController.swift */; };
 		84409F342689A7710084FC5F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84409F332689A7710084FC5F /* Assets.xcassets */; };
 		84409F372689A7710084FC5F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84409F352689A7710084FC5F /* LaunchScreen.storyboard */; };
-		84409F452689A9A30084FC5F /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84409F442689A9A30084FC5F /* HomeViewController.swift */; };
+		84409F452689A9A30084FC5F /* DashboardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84409F442689A9A30084FC5F /* DashboardController.swift */; };
 		84409F692689AA0A0084FC5F /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84409F492689AA0A0084FC5F /* Constant.swift */; };
 		84409F6A2689AA0A0084FC5F /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84409F4A2689AA0A0084FC5F /* Utilities.swift */; };
 		84409F6B2689AA0A0084FC5F /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84409F4C2689AA0A0084FC5F /* Label.swift */; };
@@ -39,21 +44,22 @@
 		84409F842689AA0A0084FC5F /* Poppins-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 84409F662689AA0A0084FC5F /* Poppins-Italic.ttf */; };
 		84409F852689AA0A0084FC5F /* Poppins-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 84409F672689AA0A0084FC5F /* Poppins-MediumItalic.ttf */; };
 		84409F8D2689B0E50084FC5F /* MenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84409F8C2689B0E50084FC5F /* MenuCollectionViewCell.swift */; };
-		84409F922689C0990084FC5F /* MakeUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84409F912689C0990084FC5F /* MakeUpViewController.swift */; };
 		84409F962689CD820084FC5F /* CatagoriesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84409F952689CD820084FC5F /* CatagoriesTableViewCell.swift */; };
-		84409F9A2689D6670084FC5F /* AddCatagoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84409F992689D6670084FC5F /* AddCatagoryViewController.swift */; };
-		84409F9F268A08020084FC5F /* AddProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84409F9E268A08020084FC5F /* AddProductViewController.swift */; };
-		84409FA3268A3A4A0084FC5F /* AddProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84409FA2268A3A4A0084FC5F /* AddProductDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0403FEFA268A629400B3EA73 /* ProductListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListController.swift; sourceTree = "<group>"; };
+		0403FEFE268A645600B3EA73 /* AddMakeUpProductController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMakeUpProductController.swift; sourceTree = "<group>"; };
+		0403FF01268A650700B3EA73 /* MakeUpItemController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeUpItemController.swift; sourceTree = "<group>"; };
+		0403FF03268A653C00B3EA73 /* AddMakeupItemController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMakeupItemController.swift; sourceTree = "<group>"; };
+		0403FF05268A6C3500B3EA73 /* ImagePickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerManager.swift; sourceTree = "<group>"; };
 		84409F272689A76F0084FC5F /* eXpired.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = eXpired.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84409F2A2689A76F0084FC5F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84409F2E2689A76F0084FC5F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		84409F332689A7710084FC5F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		84409F362689A7710084FC5F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		84409F382689A7710084FC5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		84409F442689A9A30084FC5F /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		84409F442689A9A30084FC5F /* DashboardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardController.swift; sourceTree = "<group>"; };
 		84409F492689AA0A0084FC5F /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		84409F4A2689AA0A0084FC5F /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		84409F4C2689AA0A0084FC5F /* Label.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
@@ -81,11 +87,7 @@
 		84409F662689AA0A0084FC5F /* Poppins-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Italic.ttf"; sourceTree = "<group>"; };
 		84409F672689AA0A0084FC5F /* Poppins-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-MediumItalic.ttf"; sourceTree = "<group>"; };
 		84409F8C2689B0E50084FC5F /* MenuCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCollectionViewCell.swift; sourceTree = "<group>"; };
-		84409F912689C0990084FC5F /* MakeUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeUpViewController.swift; sourceTree = "<group>"; };
 		84409F952689CD820084FC5F /* CatagoriesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatagoriesTableViewCell.swift; sourceTree = "<group>"; };
-		84409F992689D6670084FC5F /* AddCatagoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCatagoryViewController.swift; sourceTree = "<group>"; };
-		84409F9E268A08020084FC5F /* AddProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductViewController.swift; sourceTree = "<group>"; };
-		84409FA2268A3A4A0084FC5F /* AddProductDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,56 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0403FEF6268A622C00B3EA73 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0403FEF7268A624800B3EA73 /* Make Up */,
+				0403FEF8268A625100B3EA73 /* Skin Care */,
+				0403FEF9268A625A00B3EA73 /* Perfume */,
+			);
+			path = Products;
+			sourceTree = "<group>";
+		};
+		0403FEF7268A624800B3EA73 /* Make Up */ = {
+			isa = PBXGroup;
+			children = (
+				0403FEFA268A629400B3EA73 /* ProductListController.swift */,
+				0403FEFE268A645600B3EA73 /* AddMakeUpProductController.swift */,
+			);
+			path = "Make Up";
+			sourceTree = "<group>";
+		};
+		0403FEF8268A625100B3EA73 /* Skin Care */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Skin Care";
+			sourceTree = "<group>";
+		};
+		0403FEF9268A625A00B3EA73 /* Perfume */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Perfume;
+			sourceTree = "<group>";
+		};
+		0403FEFC268A634E00B3EA73 /* ProductItems */ = {
+			isa = PBXGroup;
+			children = (
+				0403FF00268A64DF00B3EA73 /* MakeUp */,
+			);
+			path = ProductItems;
+			sourceTree = "<group>";
+		};
+		0403FF00268A64DF00B3EA73 /* MakeUp */ = {
+			isa = PBXGroup;
+			children = (
+				0403FF01268A650700B3EA73 /* MakeUpItemController.swift */,
+				0403FF03268A653C00B3EA73 /* AddMakeupItemController.swift */,
+			);
+			path = MakeUp;
+			sourceTree = "<group>";
+		};
 		84409F1E2689A76E0084FC5F = {
 			isa = PBXGroup;
 			children = (
@@ -118,9 +170,9 @@
 		84409F292689A76F0084FC5F /* eXpired */ = {
 			isa = PBXGroup;
 			children = (
-				84409F432689A9810084FC5F /* Controller */,
-				84409F422689A97A0084FC5F /* View */,
 				84409F412689A9730084FC5F /* Model */,
+				84409F422689A97A0084FC5F /* View */,
+				84409F432689A9810084FC5F /* Controller */,
 				84409F482689AA0A0084FC5F /* Helper Files */,
 				84409F2A2689A76F0084FC5F /* AppDelegate.swift */,
 				84409F2E2689A76F0084FC5F /* ViewController.swift */,
@@ -150,11 +202,9 @@
 		84409F432689A9810084FC5F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				84409FA1268A3A320084FC5F /* Product Detail */,
-				84409F9D268A07EE0084FC5F /* AddProduct */,
-				84409F982689D6400084FC5F /* AddCatagory */,
-				84409F902689C0530084FC5F /* MenuDetail */,
-				84409F8F2689C03C0084FC5F /* Home */,
+				84409F8F2689C03C0084FC5F /* Dashboard */,
+				0403FEF6268A622C00B3EA73 /* Products */,
+				0403FEFC268A634E00B3EA73 /* ProductItems */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -163,6 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				84409F492689AA0A0084FC5F /* Constant.swift */,
+				84409F4F2689AA0A0084FC5F /* Extensionss.swift */,
 				84409F4A2689AA0A0084FC5F /* Utilities.swift */,
 				84409F4B2689AA0A0084FC5F /* CustomsControls */,
 				84409F532689AA0A0084FC5F /* ApiManager.swift */,
@@ -177,8 +228,8 @@
 				84409F4C2689AA0A0084FC5F /* Label.swift */,
 				84409F4D2689AA0A0084FC5F /* TextFields.swift */,
 				84409F4E2689AA0A0084FC5F /* Buttons.swift */,
-				84409F4F2689AA0A0084FC5F /* Extensionss.swift */,
 				84409F512689AA0A0084FC5F /* ImageIcon.swift */,
+				0403FF05268A6C3500B3EA73 /* ImagePickerManager.swift */,
 			);
 			path = CustomsControls;
 			sourceTree = "<group>";
@@ -208,44 +259,12 @@
 			path = "Custom Fonts";
 			sourceTree = "<group>";
 		};
-		84409F8F2689C03C0084FC5F /* Home */ = {
+		84409F8F2689C03C0084FC5F /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
-				84409F442689A9A30084FC5F /* HomeViewController.swift */,
+				84409F442689A9A30084FC5F /* DashboardController.swift */,
 			);
-			path = Home;
-			sourceTree = "<group>";
-		};
-		84409F902689C0530084FC5F /* MenuDetail */ = {
-			isa = PBXGroup;
-			children = (
-				84409F912689C0990084FC5F /* MakeUpViewController.swift */,
-			);
-			path = MenuDetail;
-			sourceTree = "<group>";
-		};
-		84409F982689D6400084FC5F /* AddCatagory */ = {
-			isa = PBXGroup;
-			children = (
-				84409F992689D6670084FC5F /* AddCatagoryViewController.swift */,
-			);
-			path = AddCatagory;
-			sourceTree = "<group>";
-		};
-		84409F9D268A07EE0084FC5F /* AddProduct */ = {
-			isa = PBXGroup;
-			children = (
-				84409F9E268A08020084FC5F /* AddProductViewController.swift */,
-			);
-			path = AddProduct;
-			sourceTree = "<group>";
-		};
-		84409FA1268A3A320084FC5F /* Product Detail */ = {
-			isa = PBXGroup;
-			children = (
-				84409FA2268A3A4A0084FC5F /* AddProductDetailViewController.swift */,
-			);
-			path = "Product Detail";
+			path = Dashboard;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -335,19 +354,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0403FEFF268A645600B3EA73 /* AddMakeUpProductController.swift in Sources */,
 				84409F6E2689AA0A0084FC5F /* Extensionss.swift in Sources */,
-				84409F922689C0990084FC5F /* MakeUpViewController.swift in Sources */,
-				84409F9F268A08020084FC5F /* AddProductViewController.swift in Sources */,
+				0403FF04268A653C00B3EA73 /* AddMakeupItemController.swift in Sources */,
+				0403FEFB268A629400B3EA73 /* ProductListController.swift in Sources */,
 				84409F2F2689A76F0084FC5F /* ViewController.swift in Sources */,
+				0403FF06268A6C3500B3EA73 /* ImagePickerManager.swift in Sources */,
 				84409F2B2689A76F0084FC5F /* AppDelegate.swift in Sources */,
 				84409F702689AA0A0084FC5F /* ImageIcon.swift in Sources */,
 				84409F722689AA0A0084FC5F /* ApiManager.swift in Sources */,
 				84409F6B2689AA0A0084FC5F /* Label.swift in Sources */,
-				84409F452689A9A30084FC5F /* HomeViewController.swift in Sources */,
-				84409FA3268A3A4A0084FC5F /* AddProductDetailViewController.swift in Sources */,
-				84409F9A2689D6670084FC5F /* AddCatagoryViewController.swift in Sources */,
+				84409F452689A9A30084FC5F /* DashboardController.swift in Sources */,
 				84409F6A2689AA0A0084FC5F /* Utilities.swift in Sources */,
 				84409F6C2689AA0A0084FC5F /* TextFields.swift in Sources */,
+				0403FF02268A650700B3EA73 /* MakeUpItemController.swift in Sources */,
 				84409F692689AA0A0084FC5F /* Constant.swift in Sources */,
 				84409F962689CD820084FC5F /* CatagoriesTableViewCell.swift in Sources */,
 				84409F6D2689AA0A0084FC5F /* Buttons.swift in Sources */,
@@ -491,6 +511,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4BQR3687MA;
 				INFOPLIST_FILE = eXpired/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -509,6 +530,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4BQR3687MA;
 				INFOPLIST_FILE = eXpired/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

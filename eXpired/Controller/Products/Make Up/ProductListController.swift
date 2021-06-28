@@ -7,11 +7,11 @@
 
 import UIKit
 
-class MakeUpViewController: UIViewController {
+class ProductListController: UIViewController {
    
     //MARK:-UI-Elements
    lazy var tableview : UITableView = {
-        let table = UITableView(frame: CGRect.zero, style: .grouped)
+        let table = UITableView()
         table.translatesAutoresizingMaskIntoConstraints = false
         table.delegate = self
         table.dataSource = self
@@ -26,6 +26,7 @@ class MakeUpViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = Constants.AppColor.bgColor
         self.navigationItem.title = "MakeUp"
+        self.navigationItem.backBarButtonItem?.title = ""
         self.navigationController?.navigationBar.barTintColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
         setUpUI()
@@ -38,7 +39,7 @@ class MakeUpViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             
-            tableview.topAnchor.constraint(equalTo: view.topAnchor, constant: 20.heightRatio),
+            tableview.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20.heightRatio),
             tableview.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20.widthRatio),
             tableview.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20.widthRatio),
             tableview.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
@@ -52,12 +53,12 @@ class MakeUpViewController: UIViewController {
     }
     @objc func plusButtonPressed()
     {
-        let controller = AddCatagoryViewController()
+        let controller = AddMakeUpProductController()
         navigationController?.pushViewController(controller, animated: true)
     }
 
 }
-extension MakeUpViewController : UITableViewDelegate,UITableViewDataSource{
+extension ProductListController : UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 6
     }
@@ -71,7 +72,7 @@ extension MakeUpViewController : UITableViewDelegate,UITableViewDataSource{
         return 82.heightRatio
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let controller = AddProductViewController()
+        let controller = MakeUpItemController()
         navigationController?.pushViewController(controller, animated: true)
     }
     

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddCatagoryViewController: UIViewController {
+class AddMakeUpProductController: UIViewController {
     
     //MARK:-UI-Elements
     let catagoreyTextField = txtField(text: "Enter your catagory", textColor:  #colorLiteral(red: 0.5607843137, green: 0.5607843137, blue: 0.5607843137, alpha: 1), font: .setFont(fontName: .Poppins_Regular, fontSize: 12))

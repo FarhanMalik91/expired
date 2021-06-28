@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
+class DashboardController: UIViewController {
     
    //MARK:- UI-Elements
     lazy var collectionView : UICollectionView = {
@@ -50,14 +50,15 @@ class HomeViewController: UIViewController {
     
 
 }
-extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSource , UICollectionViewDelegateFlowLayout
+extension DashboardController : UICollectionViewDelegate, UICollectionViewDataSource , UICollectionViewDelegateFlowLayout
 {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return 4
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MenuCollectionViewCell", for: indexPath) as! MenuCollectionViewCell
+        cell.updateCellWithTitlteAndImage(index: indexPath.row)
         return cell
     }
     
@@ -70,18 +71,18 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         }
         
         func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-            return 9.autoSized
+            return 15.autoSized
         }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
-            let controller = MakeUpViewController()
+            let controller = ProductListController()
             navigationController?.pushViewController(controller, animated: true)
         case 1:
-            let controller = MakeUpViewController()
+            let controller = ProductListController()
             navigationController?.pushViewController(controller, animated: true)
         case 2:
-            let controller = MakeUpViewController()
+            let controller = ProductListController()
             navigationController?.pushViewController(controller, animated: true)
         default:
             return 
