@@ -23,7 +23,7 @@ class MakeUpItemController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = Constants.AppColor.bgColor
-        self.navigationItem.title = "Add Product"
+        self.navigationItem.title = "Products"
         self.navigationController?.navigationBar.barTintColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
         productIconImage.contentMode = .scaleAspectFit

@@ -25,7 +25,7 @@ class ProductListController: UIViewController {
     override func viewDidLoad(){
         super.viewDidLoad()
         view.backgroundColor = Constants.AppColor.bgColor
-        self.navigationItem.title = "MakeUp"
+        self.navigationItem.title = "Categories"
         self.navigationItem.backBarButtonItem?.title = ""
         self.navigationController?.navigationBar.barTintColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
