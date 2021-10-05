@@ -1,14 +1,13 @@
 //
-//  MenuCollectionViewCell.swift
+//  ProductCollectionViewCell.swift
 //  eXpired
 //
-//  Created by Malik Farhan Asim on 28/06/2021.
+//  Created by Sarmad Ishfaq on 03/08/2021.
 //
 
 import UIKit
 
-class MenuCollectionViewCell: UICollectionViewCell {
-    
+class ProductCollectionViewCell: UICollectionViewCell {
     //MARK:-UI-Elements
     let menuImage = ImageView(image: "makeup")
     let menuName =  label(text: "MakeUp", textcolor: .black, font: .setFont(fontName: .Poppins_Medium, fontSize: 13), alignment: .center)
@@ -22,7 +21,8 @@ class MenuCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         setUpUI()
         backgroundColor = .white
-        
+        menuImage.layer.cornerRadius = 12.autoSized
+        menuName.numberOfLines = 2
     }
   
     //MARK:-Helper Functions
@@ -41,10 +41,12 @@ class MenuCollectionViewCell: UICollectionViewCell {
             menuImage.topAnchor.constraint(equalTo: containerView.topAnchor),
             menuImage.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
             menuImage.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-            menuImage.heightAnchor.constraint(equalToConstant: 60.heightRatio),
-            menuImage.widthAnchor.constraint(equalToConstant: 60.widthRatio),
+            menuImage.heightAnchor.constraint(equalToConstant: 60.autoSized),
+            menuImage.widthAnchor.constraint(equalToConstant: 60.autoSized),
             
-            menuName.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            
+            menuName.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10.autoSized),
+            menuName.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10.autoSized),
             menuName.topAnchor.constraint(equalTo: menuImage.bottomAnchor, constant: 10.heightRatio),
             menuName.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
         ])
@@ -66,16 +68,12 @@ class MenuCollectionViewCell: UICollectionViewCell {
             menuImage.image = UIImage(named: "skincare")
             
         case 2:
-            menuName.text = "Fragrance"
+            menuName.text = "Perfume /\n Aftershave"
             menuImage.image = UIImage(named: "perfume")
             
         case 3:
-            menuName.text = "Settings"
+            menuName.text = "Setting"
             menuImage.image = UIImage(named: "settings")
-            
-        case 4:
-            menuName.text = "Log Out"
-            menuImage.image = UIImage(named: "logout")
 
         default:
             break

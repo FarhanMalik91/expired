@@ -9,12 +9,12 @@ import Foundation
 import UIKit
 
 class txtField: UITextField {
-    init(text : String , textColor : UIColor , font : UIFont) {
+    init(text : String , textColor : UIColor , font : UIFont , textAlignment : NSTextAlignment = .natural) {
         super.init(frame: CGRect.zero)
         self.placeholder = text
         self.textColor = textColor
         self.font = font
-        self.textAlignment = .natural
+        self.textAlignment = textAlignment
         self.backgroundColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 0.1908711473)
         self.translatesAutoresizingMaskIntoConstraints = false
         self.layer.cornerRadius = 15
@@ -23,6 +23,7 @@ class txtField: UITextField {
         self.leftViewMode = .always
         self.rightView = padding
         self.rightViewMode = .always
+        tintColor = .black
         
     }
     

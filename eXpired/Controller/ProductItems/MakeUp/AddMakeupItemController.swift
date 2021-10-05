@@ -7,44 +7,76 @@
 
 import UIKit
 
+protocol AddMakeupItemControllerDelegate: AnyObject {
+    func refreshApi()
+}
+
 class AddMakeupItemController: UIViewController {
     
     //MARK:-UI-Elements
-    let productImage = ImageView(image: "make")
+    let productImage = ImageView(image: "makeup")
     let BrandNameLabel = label(text: "Brand", textcolor: .black, font: .setFont(fontName: .Poppins_Regular, fontSize: 14), alignment: .natural)
     let shadeLabel = label(text: "Shade", textcolor: .black, font: .setFont(fontName: .Poppins_Regular, fontSize: 14), alignment: .natural)
-    let datePurchaseLabel = label(text: "Date Purchase", textcolor: .black, font: .setFont(fontName: .Poppins_Regular, fontSize: 14), alignment: .natural)
+    let datePurchaseLabel = label(text: "Date Purchased", textcolor: .black, font: .setFont(fontName: .Poppins_Regular, fontSize: 14), alignment: .natural)
     let dateOpenedLabel = label(text: "Date Opened", textcolor: .black, font: .setFont(fontName: .Poppins_Regular, fontSize: 14), alignment: .natural)
     let expireyDateLabel = label(text: "Expiry Date", textcolor: .black, font: .setFont(fontName: .Poppins_Regular, fontSize: 14), alignment: .natural)
-    let MonthLabel = label(text: "Month", textcolor: .black, font: .setFont(fontName: .Poppins_Regular, fontSize: 14), alignment: .natural)
-    let brandNameTF = txtField(text: "Enter Name", textColor: .black, font: .setFont(fontName: .Poppins_Regular, fontSize: 14))
-    let shadeTF = txtField(text: "Enter Shade", textColor: .black, font: .setFont(fontName: .Poppins_Regular, fontSize: 14))
-    let datePurchaseTF = txtField(text: "202-555-0132", textColor: .black, font: .setFont(fontName: .Poppins_Regular, fontSize: 14))
-    let dateOpenedTF = txtField(text: "202-555-0132", textColor: .black, font: .setFont(fontName: .Poppins_Regular, fontSize: 14))
-    let expireyDateTF = txtField(text: "202-555-0132", textColor: .black, font: .setFont(fontName: .Poppins_Regular, fontSize: 14))
-    let monthTF = txtField(text: "202-555-0132", textColor: .black, font: .setFont(fontName: .Poppins_Regular, fontSize: 14))
-    let doneButton = button(text: "Done", color: .white, font: .setFont(fontName: .Poppins_Regular, fontSize: 18), cornerradius: 10, bgcolor: #colorLiteral(red: 0.137254902, green: 0.3019607843, blue: 0.4196078431, alpha: 1))
+    let MonthLabel = label(text: "Months", textcolor: .black, font: .setFont(fontName: .Poppins_Regular, fontSize: 14), alignment: .natural)
+    let brandNameTF = txtField(text: "Enter Name", textColor: .black, font: .setFont(fontName: .Poppins_Regular, fontSize: 14) , textAlignment: .center)
+    let shadeTF = txtField(text: "Enter Shade", textColor: .black, font: .setFont(fontName: .Poppins_Regular, fontSize: 14), textAlignment: .center)
+    let datePurchaseTF = txtField(text: "Select date purchased", textColor: .black, font: .setFont(fontName: .Poppins_Regular, fontSize: 14) , textAlignment: .center)
+    let dateOpenedTF = txtField(text: "Select date opened", textColor: .black, font: .setFont(fontName: .Poppins_Regular, fontSize: 14), textAlignment: .center)
+    let expireyDateTF = txtField(text: "Select date expiry", textColor: .black, font: .setFont(fontName: .Poppins_Regular, fontSize: 14), textAlignment: .center)
+    let monthTF = txtField(text: "Enter duration", textColor: .black, font: .setFont(fontName: .Poppins_Regular, fontSize: 14), textAlignment: .center)
+    let doneButton = button(text: "Done", color: .white, font: .setFont(fontName: .Poppins_Regular, fontSize: 18), cornerradius: 10, bgcolor: Constants.AppColor.appGreen)
     lazy var addImageButton : UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "addImage"), for: .normal)
+        button.setImage(UIImage(named: "addImage")?.withRenderingMode(.alwaysTemplate), for: .normal)
         button.addTarget(self, action: #selector(addImageButtonPressed), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.imageView?.tintColor = Constants.AppColor.appGreen
         return button
     }()
-    
+    var categoryId: String = ""
+    var categoryType : CategoriesOptions!
+    weak var delegate: AddMakeupItemControllerDelegate? = nil
+    var products : Product? = nil
+    var backgroundColor = UIColor()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = Constants.AppColor.bgColor
+//        view.backgroundColor = Constants.AppColor.bgColor
         self.navigationItem.title = "Add Product"
         self.navigationController?.navigationBar.barTintColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
         productImage.contentMode = .scaleAspectFill
+        productImage.layer.cornerRadius = 50.widthRatio
+        productImage.layer.borderWidth = 1
+        productImage.layer.borderColor = Constants.AppColor.appGreen.cgColor
+        
         setUPUI()
         datePurchaseTF.addInputViewDatePicker(target: self, selector: #selector(datePurchaseButtonPressed))
         dateOpenedTF.addInputViewDatePicker(target: self, selector: #selector(dateOpenedButtonPressed))
         expireyDateTF.addInputViewDatePicker(target: self, selector: #selector(dateExpireButtonPressed))
-        monthTF.addInputViewDatePicker(target: self, selector: #selector(monthbuttonPressed))
+
+        monthTF.keyboardType = .numberPad
+        doneButton.addTarget(self, action: #selector(doneButtonPressed), for: .touchUpInside)
+        
+    }
+    
+    init(categoryType: CategoriesOptions , color: UIColor) {
+        self.categoryType = categoryType
+        super.init(nibName: nil, bundle: nil)
+        view.backgroundColor = color
+        backgroundColor = color
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        populateFeilds()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     //MARK:-Helper Functions
@@ -110,7 +142,7 @@ class AddMakeupItemController: UIViewController {
             dateOpenedTF.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20.widthRatio),
             dateOpenedTF.heightAnchor.constraint(equalToConstant: 40.heightRatio),
             
-            expireyDateLabel.topAnchor.constraint(equalTo: dateOpenedTF.bottomAnchor, constant: 5.heightRatio),
+            expireyDateLabel.topAnchor.constraint(equalTo: monthTF.bottomAnchor, constant: 5.heightRatio),
             expireyDateLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20.widthRatio),
             
             expireyDateTF.topAnchor.constraint(equalTo: expireyDateLabel.bottomAnchor, constant: 5.heightRatio),
@@ -118,7 +150,7 @@ class AddMakeupItemController: UIViewController {
             expireyDateTF.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20.widthRatio),
             expireyDateTF.heightAnchor.constraint(equalToConstant: 40.heightRatio),
             
-            MonthLabel.topAnchor.constraint(equalTo: expireyDateTF.bottomAnchor, constant: 5.heightRatio),
+            MonthLabel.topAnchor.constraint(equalTo: dateOpenedTF.bottomAnchor, constant: 5.heightRatio),
             MonthLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20.widthRatio),
             
             monthTF.topAnchor.constraint(equalTo: MonthLabel.bottomAnchor, constant: 5.heightRatio),
@@ -126,7 +158,7 @@ class AddMakeupItemController: UIViewController {
             monthTF.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20.widthRatio),
             monthTF.heightAnchor.constraint(equalToConstant: 40.heightRatio),
             
-            doneButton.topAnchor.constraint(equalTo: monthTF.bottomAnchor, constant: 25.heightRatio),
+            doneButton.topAnchor.constraint(equalTo: expireyDateTF.bottomAnchor, constant: 25.heightRatio),
             doneButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20.widthRatio),
             doneButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20.widthRatio),
             doneButton.heightAnchor.constraint(equalToConstant: 44.heightRatio),
@@ -144,7 +176,18 @@ class AddMakeupItemController: UIViewController {
         productImage.layer.cornerRadius = productImage.frame.height / 2
     }
    
-
+    func populateFeilds(){
+        guard products != nil else { return }
+        productImage.downloadImage(url: products!.imageUrl)
+        brandNameTF.text = products?.brand
+        shadeTF.text = products?.shade
+        datePurchaseTF.text = products?.datePurchase
+        dateOpenedTF.text = products?.dateOpened
+        monthTF.text = products?.month
+        expireyDateTF.text = products?.dateExpiry
+        doneButton.setTitle("Update", for: .normal)
+    }
+    
     //MARK:-Selectors
     @objc func datePurchaseButtonPressed() {
         if let  datePicker = self.datePurchaseTF.inputView as? UIDatePicker {
@@ -185,5 +228,83 @@ class AddMakeupItemController: UIViewController {
                 self?.productImage.image = image
             }
         }
+    }
+    
+    
+    @objc func doneButtonPressed(){
+        if brandNameTF.text == "" {
+            showAlertWithSingleButton("Alert", "Please Enter Brand Name") {
+                
+            }
+            return
+        }
+        if shadeTF.text == "" {
+            showAlertWithSingleButton("Alert", "Please Enter Shade Name") {
+                
+            }
+            return
+        }
+        if datePurchaseTF.text == "" {
+            showAlertWithSingleButton("Alert", "Please Enter Purchase Date ") {
+                
+            }
+            return
+        }
+        if dateOpenedTF.text == "" {
+            showAlertWithSingleButton("Alert", "Please Enter Opened Date ") {
+                
+            }
+            return
+        }
+        
+        if monthTF.text == "" {
+            showAlertWithSingleButton("Alert", "Please Select Month") {
+                
+            }
+        
+        
+        if expireyDateTF.text == "" {
+            showAlertWithSingleButton("Alert", "Please Enter Expiry Date") {
+                
+            }
+            return
+        }
+            return
+        }
+        showLoadingView()
+        
+        if products == nil {
+            ApiManager.shared.uploadMedia(image: productImage.image!) { [weak self] url in
+                if let url = url {
+                    let notificationId = UUID().uuidString
+                    ApiManager.shared.addProductIntoCategory(self!.categoryType ,self!.categoryId, self!.brandNameTF.text!, self!.shadeTF.text!, self!.datePurchaseTF.text!, self!.dateOpenedTF.text!, self!.expireyDateTF.text!, self!.monthTF.text!, url , notificationId: notificationId)
+                    self?.hideLoadingView()
+                    if let delegate = self?.delegate {
+                        delegate.refreshApi()
+                    }
+                    NotificationManager.shared.createNotification(brandName: self!.brandNameTF.text!, brandId: notificationId, expiryDate: self!.expireyDateTF.text!)
+                    self?.showAlertWithSingleButton("Success", "Product added Successfully", completion: { [weak self] in
+                        self?.navigationController?.popViewController(animated: true)
+                    })
+                }
+            }
+        }else {
+            ApiManager.shared.uploadMedia(image: productImage.image!) { [weak self] url in
+                if let url = url {
+                    let notificationId = UUID().uuidString
+                    ApiManager.shared.updateProductIntoCategory(self!.categoryType ,self!.categoryId, self!.brandNameTF.text!, self!.shadeTF.text!, self!.datePurchaseTF.text!, self!.dateOpenedTF.text!, self!.expireyDateTF.text!, self!.monthTF.text!, url , productId: self!.products?.id ?? "", notificationId: notificationId)
+                    self?.hideLoadingView()
+                    if let delegate = self?.delegate {
+                        delegate.refreshApi()
+                    }
+                    NotificationManager.shared.updateNotification(brandName: self!.brandNameTF.text!, brandId: notificationId, expiryDate: self!.expireyDateTF.text!)
+                    self?.showAlertWithSingleButton("Success", "Product added Successfully", completion: { [weak self] in
+                        self?.navigationController?.popViewController(animated: true)
+                    })
+                }
+            }
+        }
+        
+        
     }
 }

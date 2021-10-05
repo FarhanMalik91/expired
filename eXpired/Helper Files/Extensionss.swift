@@ -7,7 +7,8 @@
 
 import Foundation
 import UIKit
-
+import JGProgressHUD
+import SDWebImage
 
 enum fontName : String {
    case Poppins_Light = "Poppins-Light"
@@ -15,9 +16,11 @@ enum fontName : String {
    case Poppins_Regular = "Poppins-Regular"
    case Poppins_Bold = "Poppins-Bold"
    case Poppins_SemiBold = "Poppins-SemiBold"
-    case Poppins_ExtraLight = "Poppins-ExtraLight"
-
+   case Poppins_ExtraLight = "Poppins-ExtraLight"
 }
+
+let hud = JGProgressHUD()
+
 
 extension UIFont {
 
@@ -61,13 +64,50 @@ extension UICollectionViewCell {
 }
 
 extension UIImageView{
-//    func downloadImage(url:String){
-//      //remove space if a url contains.
-//        let stringWithoutWhitespace = url.replacingOccurrences(of: " ", with: "%20", options: .regularExpression)
-//        self.sd_imageIndicator = SDWebImageActivityIndicator.gray
-////        self.sd_setImage(with: URL(string: stringWithoutWhitespace), placeholderImage: UIImage())
-//        self.sd_setImage(with: URL(string: stringWithoutWhitespace), placeholderImage: UIImage(), options: [.progressiveLoad , .highPriority], progress: nil, completed: nil)
-//    }
+    func downloadImage(url:String){
+      //remove space if a url contains.
+        let stringWithoutWhitespace = url.replacingOccurrences(of: " ", with: "%20", options: .regularExpression)
+        self.sd_imageIndicator = SDWebImageActivityIndicator.gray
+//        self.sd_setImage(with: URL(string: stringWithoutWhitespace), placeholderImage: UIImage())
+        self.sd_setImage(with: URL(string: stringWithoutWhitespace), placeholderImage: UIImage(), options: [.progressiveLoad , .highPriority], progress: nil, completed: nil)
+    }
+}
+
+extension UIViewController {
+    func showLoadingView(){
+        hud.textLabel.text = "Loading"
+        hud.show(in: self.view)
+    }
+    
+    func hideLoadingView(){
+        hud.dismiss()
+    }
+    func showAlertWithSingleButton(_ title: String, _ message:String , completion: @escaping() -> Void?) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let ok = UIAlertAction(title: "Ok", style: .default, handler: { action in
+            completion()
+        })
+        alert.addAction(ok)
+        
+        DispatchQueue.main.async(execute: {
+            self.present(alert, animated: true)
+        })
+    }
+    
+    func showAlertWithDobuleButton(_ title: String, _ message:String , completion: @escaping() -> Void) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { action in
+           
+        })
+        let ok = UIAlertAction(title: "Ok", style: .default, handler: { action in
+            completion()
+        })
+        alert.addAction(ok)
+        alert.addAction(cancel)
+        DispatchQueue.main.async(execute: {
+            self.present(alert, animated: true)
+        })
+    }
 }
 
 extension UIView {
@@ -176,4 +216,101 @@ extension UITextField {
   @objc func cancelPressed() {
     self.resignFirstResponder()
   }
+}
+extension String {
+    static func random(length: Int = 20) -> String {
+       let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+       return String((0..<length).map{ _ in letters.randomElement()! })
+     }
+}
+
+protocol ObjectSavable {
+    func setObject<Object>(_ object: Object, forKey: String) throws where Object: Encodable
+    func getObject<Object>(forKey: String, castTo type: Object.Type) throws -> Object where Object: Decodable
+}
+
+enum ObjectSavableError: String, LocalizedError {
+    case unableToEncode = "Unable to encode object into data"
+    case noValue = "No data object found for the given key"
+    case unableToDecode = "Unable to decode object into given type"
+    
+    var errorDescription: String? {
+        rawValue
+    }
+}
+
+extension UserDefaults: ObjectSavable {
+    func setObject<Object>(_ object: Object, forKey: String) throws where Object: Encodable {
+        let encoder = JSONEncoder()
+        do {
+            let data = try encoder.encode(object)
+            set(data, forKey: forKey)
+        } catch {
+            throw ObjectSavableError.unableToEncode
+        }
+    }
+    
+    func getObject<Object>(forKey: String, castTo type: Object.Type) throws -> Object where Object: Decodable {
+        guard let data = data(forKey: forKey) else { throw ObjectSavableError.noValue }
+        let decoder = JSONDecoder()
+        do {
+            let object = try decoder.decode(type, from: data)
+            return object
+        } catch {
+            throw ObjectSavableError.unableToDecode
+        }
+    }
+}
+
+extension String {
+
+    func toDate(withFormat format: String = "yyyy-MM-dd HH:mm:ss")-> Date?{
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone(identifier: "UTC")
+        dateFormatter.dateFormat = format
+        let date = dateFormatter.date(from: self)
+
+        return date
+
+    }
+}
+
+extension Date {
+
+    func toString(withFormat format: String = "EEEE ، d MMMM yyyy") -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone(identifier: "UTC")
+        dateFormatter.dateFormat = format
+        let str = dateFormatter.string(from: self)
+
+        return str
+    }
+}
+
+extension UIViewController {
+    func showInputDialog(title:String? = nil,
+                         subtitle:String? = nil,
+                         actionTitle:String? = "Add",
+                         cancelTitle:String? = "Cancel",
+                         inputPlaceholder:String? = nil,
+                         inputKeyboardType:UIKeyboardType = UIKeyboardType.default,
+                         cancelHandler: ((UIAlertAction) -> Swift.Void)? = nil,
+                         actionHandler: ((_ text: String?) -> Void)? = nil) {
+        
+        let alert = UIAlertController(title: title, message: subtitle, preferredStyle: .alert)
+        alert.addTextField { (textField:UITextField) in
+            textField.placeholder = inputPlaceholder
+            textField.keyboardType = inputKeyboardType
+        }
+        alert.addAction(UIAlertAction(title: actionTitle, style: .default, handler: { (action:UIAlertAction) in
+            guard let textField =  alert.textFields?.first else {
+                actionHandler?(nil)
+                return
+            }
+            actionHandler?(textField.text)
+        }))
+        alert.addAction(UIAlertAction(title: cancelTitle, style: .cancel, handler: cancelHandler))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
 }
